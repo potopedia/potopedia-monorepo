@@ -9,9 +9,10 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { Camera, ImageIcon, Video, Users, BarChart3, Sparkles, ChevronRight, Wand2, Share, ArrowRight, Play } from "lucide-react"
 import { LoginModal } from "@/components/auth/login-modal"
 import { RegisterModal } from "@/components/auth/register-modal"
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useInView, useMotionValue } from "framer-motion"
 import { AnimatedBackground } from "@/components/ui/animated-background"
 import { SectionBackground } from "@/components/ui/section-background"
+import { LearnMoreModal } from "@/components/ui/learn-more-modal"
 
 export default function Home() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
@@ -24,6 +25,18 @@ export default function Home() {
     damping: 30,
     restDelta: 0.001
   })
+
+  const [isLearnMoreOpen, setIsLearnMoreOpen] = useState(false)
+  const [learnMoreContent, setLearnMoreContent] = useState({
+    title: "",
+    description: "",
+    icon: null as React.ReactNode | null
+  })
+
+  const handleLearnMore = (title: string, description: string, icon?: React.ReactNode) => {
+    setLearnMoreContent({ title, description, icon })
+    setIsLearnMoreOpen(true)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -121,7 +134,7 @@ export default function Home() {
               <Camera className="h-5 w-5" />
             </div>
             <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-              Photopedia
+              Potopedia
             </span>
           </motion.div>
 
@@ -152,7 +165,13 @@ export default function Home() {
       <main className="flex-1 pt-20">
         {/* Hero Section */}
         <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden perspective-1000">
-          <SectionBackground type="particles" />
+          <motion.div
+            style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "50%"]) }}
+            className="absolute inset-0 z-0"
+          >
+            <SectionBackground type="particles" />
+          </motion.div>
+
           <div className="container relative z-10 mx-auto px-4 text-center">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
@@ -166,33 +185,56 @@ export default function Home() {
               </span>
             </motion.div>
 
-            <motion.h1
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, type: "spring" }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
-            >
-              Capture. Enhance. <br />
-              <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 inline-block"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight overflow-hidden">
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+                {["Capture.", "Enhance."].map((word, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ y: 100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: i * 0.2,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    className="inline-block"
+                  >
+                    {word}
+                  </motion.span>
+                ))}
+              </div>
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "linear"
+                  duration: 0.8,
+                  delay: 0.4,
+                  type: "spring",
+                  stiffness: 100
                 }}
-                style={{ backgroundSize: "200% auto" }}
               >
-                Monetize.
-              </motion.span>
-            </motion.h1>
+                <motion.span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-600 inline-block"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  style={{ backgroundSize: "200% auto" }}
+                >
+                  Monetize.
+                </motion.span>
+              </motion.div>
+            </h1>
 
             <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.6 }}
               className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
             >
               The all-in-one AI platform for modern photographers. From smart enhancements to instant sharing, we've got
@@ -247,11 +289,22 @@ export default function Home() {
               </motion.p>
             </motion.div>
 
-            <div className="grid gap-12 md:grid-cols-3">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid gap-12 md:grid-cols-3"
+            >
               {howItWorks.map((step, idx) => (
-                <HowItWorksCard key={step.number} step={step} index={idx} />
+                <HowItWorksCard
+                  key={step.number}
+                  step={step}
+                  index={idx}
+                  onLearnMore={() => handleLearnMore(step.title, step.description, <step.icon className="h-6 w-6" />)}
+                />
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -281,36 +334,42 @@ export default function Home() {
                 title="Photographer Tools"
                 description="Easily upload, organize, and enhance your event photos with our intuitive dashboard."
                 color="from-purple-500 to-indigo-600"
+                onLearnMore={() => handleLearnMore("Photographer Tools", "Easily upload, organize, and enhance your event photos with our intuitive dashboard.", <Camera className="h-6 w-6" />)}
               />
               <FeatureCard
                 icon={<ImageIcon className="h-8 w-8 text-white" />}
                 title="Client Galleries"
                 description="Share beautiful galleries with your clients using QR codes or event links."
                 color="from-pink-500 to-rose-600"
+                onLearnMore={() => handleLearnMore("Client Galleries", "Share beautiful galleries with your clients using QR codes or event links.", <ImageIcon className="h-6 w-6" />)}
               />
               <FeatureCard
                 icon={<Video className="h-8 w-8 text-white" />}
                 title="AI Video Generation"
                 description="Transform your photos into stunning videos with AI-powered editing tools."
                 color="from-orange-500 to-amber-600"
+                onLearnMore={() => handleLearnMore("AI Video Generation", "Transform your photos into stunning videos with AI-powered editing tools.", <Video className="h-6 w-6" />)}
               />
               <FeatureCard
                 icon={<Users className="h-8 w-8 text-white" />}
                 title="Face Recognition"
                 description="Let your clients easily find photos they appear in with smart face recognition."
                 color="from-green-500 to-emerald-600"
+                onLearnMore={() => handleLearnMore("Face Recognition", "Let your clients easily find photos they appear in with smart face recognition.", <Users className="h-6 w-6" />)}
               />
               <FeatureCard
                 icon={<Sparkles className="h-8 w-8 text-white" />}
                 title="Photo Enhancement"
                 description="Automatically enhance your photos with our AI-powered editing tools."
                 color="from-blue-500 to-cyan-600"
+                onLearnMore={() => handleLearnMore("Photo Enhancement", "Automatically enhance your photos with our AI-powered editing tools.", <Sparkles className="h-6 w-6" />)}
               />
               <FeatureCard
                 icon={<BarChart3 className="h-8 w-8 text-white" />}
                 title="Analytics Dashboard"
                 description="Track engagement and performance with comprehensive analytics."
                 color="from-violet-500 to-purple-600"
+                onLearnMore={() => handleLearnMore("Analytics Dashboard", "Track engagement and performance with comprehensive analytics.", <BarChart3 className="h-6 w-6" />)}
               />
             </motion.div>
           </div>
@@ -320,6 +379,7 @@ export default function Home() {
         <section className="py-32 relative overflow-hidden">
           <SectionBackground type="ripple" />
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900 to-indigo-900 -z-20" />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-indigo-900/50 -z-20" />
           <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 -z-10" />
 
           <div className="container mx-auto max-w-4xl text-center text-foreground dark:text-white relative z-10">
@@ -327,7 +387,7 @@ export default function Home() {
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-6xl font-bold mb-8"
+              className="text-4xl md:text-6xl font-bold mb-8 text-white"
             >
               Ready to transform your event photography?
             </motion.h2>
@@ -337,7 +397,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl md:text-2xl text-purple-100 mb-12 max-w-2xl mx-auto"
             >
-              Join thousands of photographers and event planners who trust Photopedia to deliver exceptional experiences.
+              Join thousands of photographers and event planners who trust Potopedia to deliver exceptional experiences.
             </motion.p>
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -363,7 +423,7 @@ export default function Home() {
               <div className="p-1.5 rounded-lg bg-purple-600 text-white">
                 <Camera className="h-4 w-4" />
               </div>
-              <span className="font-bold text-lg">Photopedia</span>
+              <span className="font-bold text-lg">Potopedia</span>
             </div>
             <div className="flex gap-6 text-sm">
               <Link href="/terms" className="text-muted-foreground hover:text-purple-600 transition-colors">
@@ -380,16 +440,16 @@ export default function Home() {
               </Link>
             </div>
             <div className="flex flex-col gap-1 text-xs text-muted-foreground">
-              <a href="mailto:support@photopedia.co" className="hover:text-purple-600 transition-colors">
-                support@photopedia.co
+              <a href="mailto:support@potopedia.co" className="hover:text-purple-600 transition-colors">
+                support@potopedia.co
               </a>
-              <a href="mailto:tech@photopedia.co" className="hover:text-purple-600 transition-colors">
-                tech@photopedia.co
+              <a href="mailto:tech@potopedia.co" className="hover:text-purple-600 transition-colors">
+                tech@potopedia.co
               </a>
             </div>
           </div>
           <div className="mt-4 text-center text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Photopedia. All rights reserved.
+            © {new Date().getFullYear()} Potopedia. All rights reserved.
           </div>
         </div>
       </footer>
@@ -413,20 +473,35 @@ export default function Home() {
         }}
         defaultUserType={registerUserType}
       />
+
+      <LearnMoreModal
+        isOpen={isLearnMoreOpen}
+        onClose={() => setIsLearnMoreOpen(false)}
+        title={learnMoreContent.title}
+        description={learnMoreContent.description}
+        icon={learnMoreContent.icon}
+      />
     </div>
   )
 }
 
-function HowItWorksCard({ step, index }: { step: any; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+function HowItWorksCard({ step, index, onLearnMore }: { step: any; index: number; onLearnMore: () => void }) {
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 20
+      }
+    },
+  }
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      variants={itemVariants}
       whileHover={{ y: -10 }}
       className="group relative rounded-3xl bg-card border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300"
     >
@@ -444,30 +519,27 @@ function HowItWorksCard({ step, index }: { step: any; index: number }) {
             className="object-cover"
           />
         </motion.div>
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : { scale: 0 }}
-          transition={{ delay: 0.5 + index * 0.2, type: "spring" }}
+        <div
           className="absolute top-4 left-4 z-20 h-12 w-12 rounded-2xl bg-white/90 backdrop-blur text-purple-700 flex items-center justify-center font-bold text-xl shadow-lg"
         >
           {step.number}
-        </motion.div>
+        </div>
       </div>
 
       <div className="p-8 relative">
-        <motion.div
-          initial={{ rotate: -20, scale: 0 }}
-          animate={isInView ? { rotate: 0, scale: 1 } : { rotate: -20, scale: 0 }}
-          transition={{ delay: 0.6 + index * 0.2, type: "spring" }}
+        <div
           className="absolute -top-10 right-8 h-20 w-20 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shadow-xl text-white z-20 border-4 border-card group-hover:rotate-12 transition-transform duration-300"
         >
           <step.icon className="h-10 w-10" />
-        </motion.div>
+        </div>
 
         <h3 className="text-2xl font-bold mb-3 mt-4">{step.title}</h3>
         <p className="text-muted-foreground leading-relaxed mb-6">{step.description}</p>
 
-        <div className="flex items-center text-purple-600 dark:text-purple-400 font-semibold group-hover:translate-x-2 transition-transform duration-300 cursor-pointer">
+        <div
+          onClick={onLearnMore}
+          className="flex items-center text-purple-600 dark:text-purple-400 font-semibold group-hover:translate-x-2 transition-transform duration-300 cursor-pointer"
+        >
           Learn more <ArrowRight className="ml-2 h-4 w-4" />
         </div>
       </div>
@@ -480,36 +552,77 @@ function FeatureCard({
   title,
   description,
   color,
+  onLearnMore
 }: {
   icon: React.ReactNode
   title: string
   description: string
   color: string
+  onLearnMore: () => void
 }) {
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseX = useSpring(x, { stiffness: 500, damping: 100 })
+  const mouseY = useSpring(y, { stiffness: 500, damping: 100 })
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top, width, height } = currentTarget.getBoundingClientRect()
+    const xPct = (clientX - left) / width - 0.5
+    const yPct = (clientY - top) / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  function handleMouseLeave() {
+    x.set(0)
+    y.set(0)
+  }
+
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["-10deg", "10deg"])
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-10deg", "10deg"])
+
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, scale: 0.9 },
-        visible: { opacity: 1, scale: 1 }
+        hidden: { opacity: 0, scale: 0.9, y: 20 },
+        visible: { opacity: 1, scale: 1, y: 0 }
       }}
-      whileHover={{ scale: 1.03 }}
-      className="group bg-card p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300"
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative bg-card p-8 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-2xl transition-shadow duration-300 perspective-1000"
     >
       <div
+        style={{ transform: "translateZ(20px)" }}
         className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
       >
         {icon}
       </div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed">{description}</p>
-      <div className="mt-6">
+      <h3 style={{ transform: "translateZ(10px)" }} className="text-xl font-bold mb-3">{title}</h3>
+      <p style={{ transform: "translateZ(5px)" }} className="text-muted-foreground leading-relaxed">{description}</p>
+      <div style={{ transform: "translateZ(15px)" }} className="mt-6">
         <Button
           variant="link"
+          onClick={onLearnMore}
           className="text-purple-600 dark:text-purple-400 inline-flex items-center p-0 group-hover:translate-x-1 transition-transform"
         >
           Learn more <ChevronRight className="h-4 w-4 ml-1" />
         </Button>
       </div>
+
+      {/* Glossy overlay */}
+      <motion.div
+        style={{
+          opacity: useTransform(mouseX, [-0.5, 0.5], [0, 0.2]),
+          background: "linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.8) 40%, transparent 60%)"
+        }}
+        className="absolute inset-0 rounded-3xl pointer-events-none z-10"
+      />
     </motion.div>
   )
 }

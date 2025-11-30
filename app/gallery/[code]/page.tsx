@@ -30,7 +30,7 @@ export default function GalleryPage({ params }: { params: { code: string } }) {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Camera className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">Photopedia</span>
+            <span className="text-xl font-bold">Potopedia</span>
           </div>
           <div className="flex items-center gap-4">
             <ModeToggle />
@@ -88,9 +88,9 @@ export default function GalleryPage({ params }: { params: { code: string } }) {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Camera className="h-5 w-5 text-primary" />
-            <span className="font-semibold">Photopedia</span>
+            <span className="font-semibold">Potopedia</span>
           </div>
-          <p className="text-sm text-muted-foreground">Powered by Photopedia • AI-Enhanced Event Photography</p>
+          <p className="text-sm text-muted-foreground">Powered by Potopedia • AI-Enhanced Event Photography</p>
         </div>
       </footer>
     </div>

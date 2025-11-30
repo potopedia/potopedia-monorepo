@@ -49,20 +49,7 @@ export const SectionBackground = ({ type, className = "" }: SectionBackgroundPro
                 ctx.fill()
             }
 
-            // Hover effect - particle burst
-            if (isHovered && mousePos.x >= 0) {
-                for (let i = 0; i < 20; i++) {
-                    const angle = (i / 20) * Math.PI * 2
-                    const distance = 50 + Math.sin(time * 0.005 + i) * 30
-                    const x = mousePos.x + Math.cos(angle) * distance
-                    const y = mousePos.y + Math.sin(angle) * distance
-
-                    ctx.beginPath()
-                    ctx.arc(x, y, 3, 0, Math.PI * 2)
-                    ctx.fillStyle = "rgba(236, 72, 153, 0.6)"
-                    ctx.fill()
-                }
-            }
+            // Hover effect removed as per user request
         }
 
         const renderGrid = () => {

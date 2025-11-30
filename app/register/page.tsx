@@ -44,13 +44,13 @@ export default function RegisterPage() {
       </div>
       <Link href="/" className="flex items-center gap-2 mb-8">
         <Camera className="h-6 w-6 text-primary" />
-        <span className="text-xl font-bold">Photopedia</span>
+        <span className="text-xl font-bold">Potopedia</span>
       </Link>
 
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl text-center">Create an account</CardTitle>
-          <CardDescription className="text-center">Join Photopedia to start sharing your event photos</CardDescription>
+          <CardDescription className="text-center">Join Potopedia to start sharing your event photos</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue={userType} onValueChange={setUserType}>

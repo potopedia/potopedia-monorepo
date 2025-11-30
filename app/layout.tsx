@@ -8,9 +8,9 @@ import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Photopedia - AI-Powered Event Media Platform",
+  title: "Potopedia - AI-Powered Event Media Platform",
   description: "Share, enhance, and manage event photos and videos with AI",
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export default function RootLayout({

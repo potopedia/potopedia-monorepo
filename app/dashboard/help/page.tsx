@@ -30,7 +30,7 @@ export default function HelpCenterPage() {
   const videoTutorials = [
     {
       id: "1",
-      title: "Getting Started with Photopedia",
+      title: "Getting Started with Potopedia",
       duration: "5:24",
       thumbnail: "/placeholder.svg?height=600&width=800",
     },
@@ -53,7 +53,7 @@ export default function HelpCenterPage() {
         </Link>
         <h1 className="text-3xl font-bold tracking-tight">Help Center</h1>
       </div>
-      <p className="text-muted-foreground">Find answers to your questions and learn how to use Photopedia</p>
+      <p className="text-muted-foreground">Find answers to your questions and learn how to use Potopedia</p>
 
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
@@ -179,7 +179,7 @@ export default function HelpCenterPage() {
           <Card>
             <CardHeader>
               <CardTitle>Video Tutorials</CardTitle>
-              <CardDescription>Learn how to use Photopedia with step-by-step video guides</CardDescription>
+              <CardDescription>Learn how to use Potopedia with step-by-step video guides</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6 md:grid-cols-3">
@@ -221,7 +221,7 @@ export default function HelpCenterPage() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="font-medium text-lg">Complete Photopedia Walkthrough</h3>
+                    <h3 className="font-medium text-lg">Complete Potopedia Walkthrough</h3>
                     <p className="text-sm text-muted-foreground mt-1">15:32 • Comprehensive guide to all features</p>
                     <p className="mt-2">
                       This complete walkthrough covers everything from setting up your account to using advanced AI
@@ -331,7 +331,7 @@ export default function HelpCenterPage() {
                       <MessageSquare className="h-5 w-5 text-primary" />
                       <div>
                         <h3 className="font-medium">Community Forum</h3>
-                        <p className="text-sm text-muted-foreground">Connect with other Photopedia users</p>
+                        <p className="text-sm text-muted-foreground">Connect with other Potopedia users</p>
                       </div>
                       <ExternalLink className="h-4 w-4 ml-auto" />
                     </div>

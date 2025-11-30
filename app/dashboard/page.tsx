@@ -50,7 +50,7 @@ export default function DashboardPage() {
         <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex-1">
             <div className="inline-block mb-3 px-4 py-1 bg-purple-500/20 backdrop-blur border border-purple-400/30 rounded-full">
-              <p className="text-sm font-semibold text-purple-200">Welcome to Photopedia</p>
+              <p className="text-sm font-semibold text-purple-200">Welcome to Potopedia</p>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-3">Welcome Back!</h1>
             <p className="text-lg text-slate-300 max-w-xl">

@@ -53,11 +53,11 @@ export function RegisterModal({ isOpen, onClose, onOpenLogin, defaultUserType = 
           <div className="flex justify-center mb-2">
             <div className="flex items-center gap-2">
               <Camera className="h-5 w-5 text-primary" />
-              <span className="text-lg font-bold">Photopedia</span>
+              <span className="text-lg font-bold">Potopedia</span>
             </div>
           </div>
           <DialogTitle className="text-xl">Create an account</DialogTitle>
-          <DialogDescription className="text-sm">Join Photopedia to start sharing your event photos</DialogDescription>
+          <DialogDescription className="text-sm">Join Potopedia to start sharing your event photos</DialogDescription>
         </DialogHeader>
 
         <Tabs defaultValue={userType} onValueChange={setUserType}>

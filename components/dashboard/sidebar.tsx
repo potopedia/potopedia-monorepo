@@ -109,7 +109,7 @@ export function Sidebar({ userRole = "photographer" }: SidebarProps) {
           <div className="p-4 border-b">
             <Link href="/" className="flex items-center gap-2">
               <Camera className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">Photopedia</span>
+              <span className="text-xl font-bold">Potopedia</span>
             </Link>
           </div>
 

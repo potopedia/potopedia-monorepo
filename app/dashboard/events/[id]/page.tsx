@@ -24,7 +24,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
     galleryExpiry: "2026-04-15",
     allowDownloads: true,
     allowSharing: true,
-    shareUrl: "https://photopedia.com/gallery/smith-wedding",
+    shareUrl: "https://potopedia.com/gallery/smith-wedding",
     shareCode: "SMITH2025",
   }
 
@@ -231,7 +231,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
                     <div className="text-center">
                       <p className="text-3xl font-bold tracking-widest">{event.shareCode}</p>
                       <p className="text-sm text-muted-foreground mt-2">
-                        Clients can enter this code at photopedia.com/gallery
+                        Clients can enter this code at potopedia.com/gallery
                       </p>
                     </div>
                   </div>

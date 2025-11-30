@@ -73,7 +73,7 @@ export default function VerifyOTPPage() {
       </div>
       <Link href="/" className="flex items-center gap-2 mb-8">
         <Camera className="h-6 w-6 text-primary" />
-        <span className="text-xl font-bold">Photopedia</span>
+        <span className="text-xl font-bold">Potopedia</span>
       </Link>
 
       <Card className="w-full max-w-md">

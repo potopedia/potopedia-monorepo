@@ -65,11 +65,11 @@ export function LoginModal({ isOpen, onClose, onOpenRegister }: LoginModalProps)
           <div className="flex justify-center mb-2">
             <div className="flex items-center gap-2">
               <Camera className="h-5 w-5 text-primary" />
-              <span className="text-lg font-bold">Photopedia</span>
+              <span className="text-lg font-bold">Potopedia</span>
             </div>
           </div>
           <DialogTitle className="text-xl">Welcome back</DialogTitle>
-          <DialogDescription className="text-sm">Sign in to your Photopedia account</DialogDescription>
+          <DialogDescription className="text-sm">Sign in to your Potopedia account</DialogDescription>
         </DialogHeader>
 
         {/* Role Selection */}
@@ -80,8 +80,8 @@ export function LoginModal({ isOpen, onClose, onOpenRegister }: LoginModalProps)
               type="button"
               onClick={() => setUserRole("photographer")}
               className={`p-3 rounded-lg border-2 transition-all ${userRole === "photographer"
-                  ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
-                  : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
+                ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
+                : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
                 }`}
             >
               <div className="text-center">
@@ -93,8 +93,8 @@ export function LoginModal({ isOpen, onClose, onOpenRegister }: LoginModalProps)
               type="button"
               onClick={() => setUserRole("client")}
               className={`p-3 rounded-lg border-2 transition-all ${userRole === "client"
-                  ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
-                  : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
+                ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
+                : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
                 }`}
             >
               <div className="text-center">
@@ -106,8 +106,8 @@ export function LoginModal({ isOpen, onClose, onOpenRegister }: LoginModalProps)
               type="button"
               onClick={() => setUserRole("guest")}
               className={`p-3 rounded-lg border-2 transition-all ${userRole === "guest"
-                  ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
-                  : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
+                ? "border-purple-600 bg-purple-50 dark:bg-purple-950"
+                : "border-gray-200 dark:border-gray-800 hover:border-purple-300"
                 }`}
             >
               <div className="text-center">

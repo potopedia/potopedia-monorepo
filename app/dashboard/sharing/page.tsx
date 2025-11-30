@@ -61,7 +61,7 @@ export default function SharingPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Public Gallery Link</h3>
                 <div className="flex gap-2">
-                  <Input value="https://photopedia.com/gallery/smith-wedding" readOnly />
+                  <Input value="https://potopedia.com/gallery/smith-wedding" readOnly />
                   <Button variant="outline">
                     <Copy className="h-4 w-4" />
                   </Button>
@@ -74,7 +74,7 @@ export default function SharingPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Password Protected Link</h3>
                 <div className="flex gap-2">
-                  <Input value="https://photopedia.com/gallery/smith-wedding?protected=true" readOnly />
+                  <Input value="https://potopedia.com/gallery/smith-wedding?protected=true" readOnly />
                   <Button variant="outline">
                     <Copy className="h-4 w-4" />
                   </Button>
@@ -99,7 +99,7 @@ export default function SharingPage() {
                   <div className="text-center">
                     <p className="text-3xl font-bold tracking-widest">SMITH2025</p>
                     <p className="text-sm text-muted-foreground mt-2">
-                      Clients can enter this code at photopedia.com/gallery
+                      Clients can enter this code at potopedia.com/gallery
                     </p>
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export default function SharingPage() {
                         id="embed-code"
                         className="w-full h-24 p-3 rounded-md border bg-muted/50 text-sm font-mono"
                         readOnly
-                        value={`<iframe src="https://photopedia.com/embed/smith-wedding" width="100%" height="500" frameborder="0" allowfullscreen></iframe>`}
+                        value={`<iframe src="https://potopedia.com/embed/smith-wedding" width="100%" height="500" frameborder="0" allowfullscreen></iframe>`}
                       ></textarea>
                       <Button variant="outline" size="sm" className="absolute top-2 right-2">
                         <Copy className="h-4 w-4" />

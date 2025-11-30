@@ -41,7 +41,7 @@ export default function AdminDashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to the Photopedia admin dashboard</p>
+          <p className="text-muted-foreground">Welcome to the Potopedia admin dashboard</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline">
