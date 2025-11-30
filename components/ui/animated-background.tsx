@@ -19,18 +19,20 @@ export const AnimatedBackground = () => {
         let height = Math.max(300, window.innerHeight * 0.4)
 
         const resize = () => {
-            width = window.innerWidth
-            height = Math.max(300, window.innerHeight * 0.4)
-            canvas.width = width
-            canvas.height = height
+            if (canvas) {
+                width = canvas.offsetWidth
+                height = canvas.offsetHeight
+                canvas.width = width
+                canvas.height = height
+            }
         }
         window.addEventListener("resize", resize)
         resize()
 
         const waves = [
-            { color: "rgba(147, 51, 234, 0.2)", speed: 0.002, amplitude: 80, frequency: 0.005, offset: 0 },
-            { color: "rgba(79, 70, 229, 0.2)", speed: 0.003, amplitude: 120, frequency: 0.004, offset: 2 },
-            { color: "rgba(236, 72, 153, 0.2)", speed: 0.0015, amplitude: 60, frequency: 0.006, offset: 4 },
+            { color: "rgba(147, 51, 234, 0.2)", speed: 0.002, amplitude: 50, frequency: 0.005, offset: 0 },
+            { color: "rgba(79, 70, 229, 0.2)", speed: 0.003, amplitude: 70, frequency: 0.004, offset: 2 },
+            { color: "rgba(236, 72, 153, 0.2)", speed: 0.0015, amplitude: 40, frequency: 0.006, offset: 4 },
         ]
 
         const render = () => {

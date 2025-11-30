@@ -428,13 +428,13 @@ function HowItWorksCard({ step, index }: { step: any; index: number }) {
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6, delay: index * 0.2 }}
       whileHover={{ y: -10 }}
-      className="group relative rounded-3xl bg-card border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500"
+      className="group relative rounded-3xl bg-card border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300"
     >
       <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
         <motion.div
           whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="h-full w-full"
         >
           <Image

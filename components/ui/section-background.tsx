@@ -30,6 +30,7 @@ export const SectionBackground = ({ type, className = "" }: SectionBackgroundPro
             canvas.width = width
             canvas.height = height
         }
+        window.addEventListener("resize", resize)
         resize()
 
         const renderParticles = () => {
@@ -183,6 +184,7 @@ export const SectionBackground = ({ type, className = "" }: SectionBackgroundPro
         render()
 
         return () => {
+            window.removeEventListener("resize", resize)
             cancelAnimationFrame(animationFrameId)
         }
     }, [type, mousePos, isHovered])
